@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05/10/2019 10:02:58 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="tienda" name="com.demo.modelo.Producto" optimistic-lock="version" table="producto">
+    <id name="idProducto" type="int">
+      <column name="id_producto"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.demo.modelo.Marca" fetch="select" name="marca">
+      <column name="id_marca" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.demo.modelo.Presentacion" fetch="select" name="presentacion">
+      <column name="id_presentacion" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.demo.modelo.Proveedor" fetch="select" name="proveedor">
+      <column name="id_proveedor" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="com.demo.modelo.Zona" fetch="select" name="zona">
+      <column name="id_zona" not-null="true"/>
+    </many-to-one>
+    <property name="codigo" type="int">
+      <column name="codigo" not-null="true"/>
+    </property>
+    <property name="descripcionProducto" type="string">
+      <column length="1000" name="descripcion_producto" not-null="true"/>
+    </property>
+    <property name="precio" type="double">
+      <column name="precio" not-null="true" precision="22" scale="0"/>
+    </property>
+    <property name="stock" type="int">
+      <column name="stock" not-null="true"/>
+    </property>
+    <property name="iva" type="int">
+      <column name="iva" not-null="true"/>
+    </property>
+    <property name="peso" type="double">
+      <column name="peso" not-null="true" precision="22" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>
