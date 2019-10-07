@@ -821,7 +821,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
 
         descripcion = txtDescripcionMarca.getText();
         marca.setDescripcion(descripcion);
-        cntmarca.modificaMarca(descripcion);
+        cntmarca.modificaMarca(descripcion, marca);
 
     }//GEN-LAST:event_btnModificaMarcaActionPerformed
 

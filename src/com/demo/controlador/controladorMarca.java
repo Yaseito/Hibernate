@@ -24,17 +24,14 @@ public class controladorMarca {
         return id;
     }
 
-    public void modificaMarca(String descripcion) {
-        
-        Marca marca = null;
+    public void modificaMarca(String descripcion, Marca marca) {
+
         marca.setDescripcion(descripcion);
         modeloMarca.actualizaMarca(marca);
 
     }
 
-    public void eliminaMarca(String descripcion) {
-        Marca marca = null;
-        marca.setDescripcion(descripcion);
+    public void eliminaMarca(Marca marca) {
         modeloMarca.eliminaMarca(marca);
     }
 
