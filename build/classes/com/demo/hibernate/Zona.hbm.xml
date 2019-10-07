@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 05/10/2019 10:02:58 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="tienda" name="com.demo.modelo.Zona" optimistic-lock="version" table="zona">
+  <class catalog="tienda" name="com.demo.modelo.entidades.Zona" optimistic-lock="version" table="zona">
     <id name="idZona" type="int">
       <column name="id_zona"/>
       <generator class="assigned"/>
@@ -14,7 +14,7 @@
       <key>
         <column name="id_zona" not-null="true"/>
       </key>
-      <one-to-many class="com.demo.modelo.Producto"/>
+      <one-to-many class="com.demo.modelo.entidades.Producto"/>
     </set>
   </class>
 </hibernate-mapping>

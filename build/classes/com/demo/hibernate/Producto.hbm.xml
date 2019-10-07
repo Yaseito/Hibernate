@@ -2,21 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 05/10/2019 10:02:58 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="tienda" name="com.demo.modelo.Producto" optimistic-lock="version" table="producto">
+  <class catalog="tienda" name="com.demo.modelo.entidades.Producto" optimistic-lock="version" table="producto">
     <id name="idProducto" type="int">
       <column name="id_producto"/>
       <generator class="assigned"/>
     </id>
-    <many-to-one class="com.demo.modelo.Marca" fetch="select" name="marca">
+    <many-to-one class="com.demo.modelo.entidades.Marca" fetch="select" name="marca">
       <column name="id_marca" not-null="true"/>
     </many-to-one>
-    <many-to-one class="com.demo.modelo.Presentacion" fetch="select" name="presentacion">
+    <many-to-one class="com.demo.modelo.entidades.Presentacion" fetch="select" name="presentacion">
       <column name="id_presentacion" not-null="true"/>
     </many-to-one>
-    <many-to-one class="com.demo.modelo.Proveedor" fetch="select" name="proveedor">
+    <many-to-one class="com.demo.modelo.entidades.Proveedor" fetch="select" name="proveedor">
       <column name="id_proveedor" not-null="true"/>
     </many-to-one>
-    <many-to-one class="com.demo.modelo.Zona" fetch="select" name="zona">
+    <many-to-one class="com.demo.modelo.entidades.Zona" fetch="select" name="zona">
       <column name="id_zona" not-null="true"/>
     </many-to-one>
     <property name="codigo" type="int">

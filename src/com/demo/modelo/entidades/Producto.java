@@ -1,7 +1,7 @@
-package com.demo.modelo;
+package com.demo.modelo.entidades;
 // Generated 05/10/2019 10:02:54 PM by Hibernate Tools 4.3.1
 
-import com.demo.modelo.Marca;
+import com.demo.modelo.entidades.Marca;
 
 
 

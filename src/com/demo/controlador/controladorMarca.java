@@ -5,11 +5,9 @@
  */
 package com.demo.controlador;
 
-import com.demo.modelo.Marca;
+import com.demo.modelo.entidades.Marca;
+import com.demo.modelo.modeloMarca;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
  *
@@ -17,53 +15,40 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class controladorMarca {
 
-    private Session sesion;
-
-    private void iniciaOperacion() {
-        SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        sesion = sessionFactory.openSession();
-        sesion.getTransaction().begin();
-    }
-
-    private void terminaOperacion() {
-        sesion.getTransaction().commit();
-        sesion.close();
-    }
-
-    public int guardaMarca(Marca marca) {
+    public int guardaMarca(String descripcion) {
         int id = 0;
-        iniciaOperacion();
-        id = (int) sesion.save(marca);
-        terminaOperacion();
+
+        Marca marca = new Marca();
+        marca.setDescripcion(descripcion);
+        id = modeloMarca.guardaMarca(marca);
         return id;
     }
 
-    public void actualizaMarca(Marca marca) {
-        iniciaOperacion();
-        sesion.update(marca);
-        terminaOperacion();
-    }
-
-    public void eliminaMarca(Marca marca) {
-        iniciaOperacion();
-        sesion.delete(marca);
-        terminaOperacion();
-    }
-
-    public Marca buscarMarca(int idMarca) {
+    public void modificaMarca(String descripcion) {
+        
         Marca marca = null;
+        marca.setDescripcion(descripcion);
+        modeloMarca.actualizaMarca(marca);
 
-        iniciaOperacion();
-        marca = (Marca) sesion.get(Marca.class, idMarca);
-        terminaOperacion();
-        return marca;
     }
 
-    public List<Marca> listarMarca() {
+    public void eliminaMarca(String descripcion) {
+        Marca marca = null;
+        marca.setDescripcion(descripcion);
+        modeloMarca.eliminaMarca(marca);
+    }
+
+    public List<Marca> listaMarca() {
         List<Marca> listaMarca = null;
-        iniciaOperacion();
-        listaMarca = sesion.createQuery("from Marca").list();
-        terminaOperacion();
+
+        listaMarca = modeloMarca.listarMarca();
+
         return listaMarca;
+    }
+    
+    public Marca buscaMarca(int idMarca){
+        Marca marca = null;
+        marca = modeloMarca.buscarMarca(idMarca);
+        return marca;
     }
 }
