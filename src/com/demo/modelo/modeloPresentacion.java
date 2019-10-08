@@ -18,40 +18,42 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class modeloPresentacion {
 
-    private Session sesion;
+   static private Session sesion;
 
-    private void iniciaOperacion() {
+    static private void iniciaOperacion() {
         SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         sesion = sessionFactory.openSession();
         sesion.getTransaction().begin();
     }
 
-    private void terminaOperacion() {
+    static private void terminaOperacion() {
         sesion.getTransaction().commit();
         sesion.close();
     }
 
-    public int guardaPresentacion(Presentacion presentacion) {
-        int id = 0;
+    static public int guardaPresentacion(Presentacion presentacion) {
+        int id = presentacion.getIdPresentacion();
+
         iniciaOperacion();
         id = (int) sesion.save(presentacion);
         terminaOperacion();
+
         return id;
     }
 
-    public void actualizaPresentacion(Presentacion presentacion) {
+    static public void actualizaPresentacion(Presentacion presentacion) {
         iniciaOperacion();
         sesion.update(presentacion);
         terminaOperacion();
     }
 
-    public void eliminaPresentacion(Presentacion presentacion) {
+    static public void eliminaPresentacion(Presentacion presentacion) {
         iniciaOperacion();
         sesion.delete(presentacion);
         terminaOperacion();
     }
 
-    public Presentacion buscarPresentacion(int idPresentacion) {
+    static public Presentacion buscarPresentacion(int idPresentacion) {
         Presentacion presentacion = null;
 
         iniciaOperacion();
@@ -60,7 +62,7 @@ public class modeloPresentacion {
         return presentacion;
     }
 
-    public List<Presentacion> listarPresentacion() {
+    static public List<Presentacion> listarPresentacion() {
         List<Presentacion> listaPresentacion = null;
         iniciaOperacion();
         listaPresentacion = sesion.createQuery("from Presentacion").list();

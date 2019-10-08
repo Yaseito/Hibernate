@@ -6,6 +6,7 @@
 package com.demo.modelo;
 
 import com.demo.modelo.entidades.Marca;
+import com.demo.modelo.entidades.Proveedor;
 import com.demo.modelo.entidades.Zona;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,40 +19,42 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class modeloZona {
 
-    private Session sesion;
+   static private Session sesion;
 
-    private void iniciaOperacion() {
+    static private void iniciaOperacion() {
         SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         sesion = sessionFactory.openSession();
         sesion.getTransaction().begin();
     }
 
-    private void terminaOperacion() {
+    static private void terminaOperacion() {
         sesion.getTransaction().commit();
         sesion.close();
     }
 
-    public int guardaZona(Zona zona) {
-        int id = 0;
+    static public int guardaZona(Zona zona) {
+        int id = zona.getIdZona();
+
         iniciaOperacion();
         id = (int) sesion.save(zona);
         terminaOperacion();
+
         return id;
     }
 
-    public void actualizaZona(Zona zona) {
+    static public void actualizaZona(Zona zona) {
         iniciaOperacion();
         sesion.update(zona);
         terminaOperacion();
     }
 
-    public void eliminaZona(Zona zona) {
+    static public void eliminaZona(Zona zona) {
         iniciaOperacion();
         sesion.delete(zona);
         terminaOperacion();
     }
 
-    public Zona buscarZona(int idZona) {
+    static public Zona buscarZona(int idZona) {
         Zona zona = null;
 
         iniciaOperacion();
@@ -60,11 +63,11 @@ public class modeloZona {
         return zona;
     }
 
-    public List<Zona> listarZona() {
+    static public List<Zona> listarZona() {
         List<Zona> listaZona = null;
         iniciaOperacion();
         listaZona = sesion.createQuery("from Zona").list();
         terminaOperacion();
         return listaZona;
-    }    
+    }
 }

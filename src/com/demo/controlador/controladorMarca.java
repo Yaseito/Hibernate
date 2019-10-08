@@ -7,6 +7,7 @@ package com.demo.controlador;
 
 import com.demo.modelo.entidades.Marca;
 import com.demo.modelo.modeloMarca;
+import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
 
 /**
@@ -15,13 +16,12 @@ import java.util.List;
  */
 public class controladorMarca {
 
-    public int guardaMarca(String descripcion) {
-        int id = 0;
+    public void guardaMarca(int id, String descripcion) {
 
         Marca marca = new Marca();
         marca.setDescripcion(descripcion);
-        id = modeloMarca.guardaMarca(marca);
-        return id;
+        marca.setIdMarca(id);
+        modeloMarca.guardaMarca(marca);
     }
 
     public void modificaMarca(String descripcion, Marca marca) {

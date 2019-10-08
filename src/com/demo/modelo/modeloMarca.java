@@ -31,7 +31,7 @@ public class modeloMarca {
     }
 
     static public int guardaMarca(Marca marca) {
-        int id = 0;
+        int id = marca.getIdMarca();
 
         iniciaOperacion();
         id = (int) sesion.save(marca);

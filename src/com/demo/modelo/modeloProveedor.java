@@ -6,6 +6,7 @@
 package com.demo.modelo;
 
 import com.demo.modelo.entidades.Marca;
+import com.demo.modelo.entidades.Presentacion;
 import com.demo.modelo.entidades.Proveedor;
 import java.util.List;
 import org.hibernate.Session;
@@ -18,40 +19,42 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class modeloProveedor {
 
-    private Session sesion;
+   static private Session sesion;
 
-    private void iniciaOperacion() {
+    static private void iniciaOperacion() {
         SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         sesion = sessionFactory.openSession();
         sesion.getTransaction().begin();
     }
 
-    private void terminaOperacion() {
+    static private void terminaOperacion() {
         sesion.getTransaction().commit();
         sesion.close();
     }
 
-    public int guardaProveedor(Proveedor proveedor) {
-        int id = 0;
+    static public int guardaProveedor(Proveedor proveedor) {
+        int id = proveedor.getIdProveedor();
+
         iniciaOperacion();
         id = (int) sesion.save(proveedor);
         terminaOperacion();
+
         return id;
     }
 
-    public void actualizaProveedor(Proveedor proveedor) {
+    static public void actualizaProveedor(Proveedor proveedor) {
         iniciaOperacion();
         sesion.update(proveedor);
         terminaOperacion();
     }
 
-    public void eliminaProveedor(Proveedor proveedor) {
+    static public void eliminaProveedor(Proveedor proveedor) {
         iniciaOperacion();
         sesion.delete(proveedor);
         terminaOperacion();
     }
 
-    public Proveedor buscarProveedor(int idProveedor) {
+    static public Proveedor buscarProveedor(int idProveedor) {
         Proveedor proveedor = null;
 
         iniciaOperacion();
@@ -60,11 +63,11 @@ public class modeloProveedor {
         return proveedor;
     }
 
-    public List<Proveedor> listarProveedor() {
+    static public List<Proveedor> listarProveedor() {
         List<Proveedor> listaProveedor = null;
         iniciaOperacion();
         listaProveedor = sesion.createQuery("from Proveedor").list();
         terminaOperacion();
         return listaProveedor;
-    }    
+    }
 }

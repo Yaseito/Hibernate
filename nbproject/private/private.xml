@@ -5,16 +5,15 @@
         <group>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/vista/Vista.java</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Presentacion.hbm.xml</file>
-            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Producto.hbm.xml</file>
-            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Marca.java</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/principal/Principal.java</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/modelo/Modelo.java</file>
-            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Proveedor.hbm.xml</file>
-            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Proveedor.java</file>
+            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/vista/vistaPrincipal.java</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/Marca.hbm.xml</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/controlador/Controlador.java</file>
+            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/controlador/controladorMarca.java</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/hibernate.cfg.xml</file>
             <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/hibernate/hibernate.reveng.xml</file>
+            <file>file:/G:/Tarea%20de%20Arquitectura/TIENDA/src/com/demo/modelo/modeloMarca.java</file>
         </group>
     </open-files>
 </project-private>

@@ -7,6 +7,7 @@ package com.demo.modelo;
 
 import com.demo.modelo.entidades.Marca;
 import com.demo.modelo.entidades.Producto;
+import com.demo.modelo.entidades.Zona;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,41 +18,44 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author Hijos
  */
 public class modeloProducto {
+    
+   static private Session sesion;
 
-    private Session sesion;
-
-    private void iniciaOperacion() {
+    static private void iniciaOperacion() {
         SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
         sesion = sessionFactory.openSession();
         sesion.getTransaction().begin();
     }
 
-    private void terminaOperacion() {
+    static private void terminaOperacion() {
         sesion.getTransaction().commit();
         sesion.close();
     }
 
-    public int guardaProducto(Producto producto) {
-        int id = 0;
+    static public int guardaProducto(Producto producto) {
+        
+        int id = producto.getIdProducto();
+
         iniciaOperacion();
         id = (int) sesion.save(producto);
         terminaOperacion();
+
         return id;
     }
 
-    public void actualizaProducto(Producto producto) {
+    static public void actualizaProducto(Producto producto) {
         iniciaOperacion();
         sesion.update(producto);
         terminaOperacion();
     }
 
-    public void eliminaProducto(Producto producto) {
+    static public void eliminaProducto(Producto producto) {
         iniciaOperacion();
         sesion.delete(producto);
         terminaOperacion();
     }
 
-    public Producto buscarProducto(int idProducto) {
+    static public Producto buscarProducto(int idProducto) {
         Producto producto = null;
 
         iniciaOperacion();
@@ -60,11 +64,12 @@ public class modeloProducto {
         return producto;
     }
 
-    public List<Producto> listarProducto() {
+    static public List<Producto> listarProducto() {
         List<Producto> listaProducto = null;
         iniciaOperacion();
         listaProducto = sesion.createQuery("from Producto").list();
         terminaOperacion();
         return listaProducto;
-    }    
+    }
+
 }
