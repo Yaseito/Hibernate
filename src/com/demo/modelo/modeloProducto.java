@@ -9,6 +9,7 @@ import com.demo.modelo.entidades.Marca;
 import com.demo.modelo.entidades.Producto;
 import com.demo.modelo.entidades.Zona;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -18,8 +19,8 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author Hijos
  */
 public class modeloProducto {
-    
-   static private Session sesion;
+
+    static private Session sesion;
 
     static private void iniciaOperacion() {
         SessionFactory sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
@@ -33,42 +34,68 @@ public class modeloProducto {
     }
 
     static public int guardaProducto(Producto producto) {
-        
+
         int id = producto.getIdProducto();
-
-        iniciaOperacion();
-        id = (int) sesion.save(producto);
-        terminaOperacion();
-
+        try {
+            iniciaOperacion();
+            id = (int) sesion.save(producto);
+            terminaOperacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
         return id;
     }
 
     static public void actualizaProducto(Producto producto) {
         iniciaOperacion();
-        sesion.update(producto);
-        terminaOperacion();
+        try {
+            sesion.update(producto);
+            terminaOperacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
     }
 
     static public void eliminaProducto(Producto producto) {
         iniciaOperacion();
-        sesion.delete(producto);
-        terminaOperacion();
+        try {
+            sesion.delete(producto);
+            terminaOperacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
     }
 
     static public Producto buscarProducto(int idProducto) {
         Producto producto = null;
-
-        iniciaOperacion();
-        producto = (Producto) sesion.get(Producto.class, idProducto);
-        terminaOperacion();
+        try {
+            iniciaOperacion();
+            producto = (Producto) sesion.get(Producto.class, idProducto);
+            terminaOperacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
         return producto;
     }
 
     static public List<Producto> listarProducto() {
         List<Producto> listaProducto = null;
-        iniciaOperacion();
-        listaProducto = sesion.createQuery("from Producto").list();
-        terminaOperacion();
+        try {
+            iniciaOperacion();
+            listaProducto = sesion.createQuery("from Producto").list();
+
+            for (int i = 0; i < listaProducto.size(); i++) {
+                //Idea tomada de (Ascencio Gino, 2019)
+                listaProducto.get(i).getMarca().getDescripcion();
+                listaProducto.get(i).getPresentacion().getDescripcion();
+                listaProducto.get(i).getProveedor().getDescripcion();
+                listaProducto.get(i).getZona().getDescripcion();
+                //(Obtenido de Github: Mapeo Tienda)
+            }
+            terminaOperacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
         return listaProducto;
     }
 
